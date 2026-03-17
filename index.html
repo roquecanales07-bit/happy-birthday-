@@ -11,7 +11,7 @@
         :root {
             --gold: #c5a059;
             --glass: rgba(0, 0, 0, 0.85);
-            --bg-dark: #1a1a1a;
+            --bg-dark: #121212;
         }
 
         body, html {
@@ -19,15 +19,15 @@
             font-family: 'Montserrat', sans-serif;
             background-color: var(--bg-dark);
             color: white;
-            overflow: hidden; /* Bloqueo total inicial */
+            overflow: hidden; /* Bloqueo total al inicio */
         }
 
-        /* FONDO ANIMADO */
+        /* FONDO ANIMADO PERMANENTE */
         .bg-layer {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1;
-            background: linear-gradient(-45deg, #1a1a1a, #3d3d3d, #2d3b2d, #1a1a1a);
+            background: linear-gradient(-45deg, #1a1a1a, #333333, #2d3b2d, #1a1a1a);
             background-size: 400% 400%;
             animation: gradient 15s ease infinite;
         }
@@ -38,7 +38,7 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* PANTALLA 1: PORTADA */
+        /* PANTALLA 1: PORTADA SOLA */
         #portada {
             height: 100vh;
             width: 100%;
@@ -47,35 +47,33 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 20px;
-            position: absolute;
-            top: 0; left: 0;
             z-index: 100;
-            background: var(--bg-dark); /* Color sólido para que no se vea lo de atrás */
+            position: fixed;
+            background: var(--bg-dark);
+            transition: opacity 0.8s ease;
         }
 
         #portada h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 3.5rem;
+            font-size: 3rem;
             color: var(--gold);
             margin-bottom: 20px;
         }
 
         .btn-start {
-            padding: 18px 50px;
+            padding: 15px 45px;
             border: 2px solid var(--gold);
             background: transparent;
             color: var(--gold);
             letter-spacing: 4px;
             font-weight: 600;
             cursor: pointer;
-            transition: 0.4s;
             text-transform: uppercase;
         }
 
         /* CONTENIDO QUE APARECE DESPUÉS */
         #main-content {
-            display: none; /* Oculto hasta el clic */
+            display: none; 
             height: 100vh;
             overflow-y: scroll;
             scroll-snap-type: y mandatory;
@@ -85,70 +83,46 @@
             height: 100vh;
             width: 100%;
             display: flex;
+            flex-direction: column; /* Optimizado para celular */
             scroll-snap-align: start;
-            flex-direction: row; /* Default para PC */
         }
 
         .foto {
-            width: 50%;
-            height: 100%;
+            flex: 1; /* Mitad de la pantalla */
             background-size: cover;
             background-position: center;
-            border-right: 2px solid var(--gold);
+            border-bottom: 2px solid var(--gold);
         }
 
         .texto {
-            width: 50%;
-            height: 100%;
+            flex: 1; /* Mitad de la pantalla */
             background: var(--glass);
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 40px;
+            padding: 30px;
             backdrop-filter: blur(10px);
         }
 
         .texto-inner {
-            text-align: right;
-            border-right: 4px solid var(--gold);
-            padding-right: 25px;
+            text-align: center;
+            border-bottom: 3px solid var(--gold);
+            padding-bottom: 20px;
+            max-width: 90%;
         }
 
         .texto-inner h2 {
             font-family: 'Playfair Display', serif;
-            font-size: 2.2rem;
+            font-size: 2rem;
             color: var(--gold);
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
 
-        .texto-inner p {
-            font-size: 1.1rem;
-            line-height: 1.7;
-        }
-
-        /* OPTIMIZACIÓN PARA TELÉFONO (IMPORTANTE) */
-        @media (max-width: 768px) {
-            section {
-                flex-direction: column; /* Foto arriba, texto abajo */
-            }
-            .foto {
-                width: 100%;
-                height: 45%; /* La foto ocupa casi la mitad superior */
-                border-right: none;
-                border-bottom: 2px solid var(--gold);
-            }
-            .texto {
-                width: 100%;
-                height: 55%; /* El texto ocupa la mitad inferior */
-                padding: 30px;
-            }
-            .texto-inner {
-                text-align: center; /* Centrado en móvil para mejor lectura */
-                border-right: none;
-                border-bottom: 4px solid var(--gold);
-                padding: 0 0 20px 0;
-            }
-            #portada h1 { font-size: 2.5rem; }
+        /* DISEÑO PARA COMPUTADORA */
+        @media (min-width: 900px) {
+            section { flex-direction: row; }
+            .foto { border-bottom: none; border-right: 2px solid var(--gold); }
+            .texto-inner { text-align: right; border-bottom: none; border-right: 3px solid var(--gold); padding: 0 25px 0 0; }
         }
     </style>
 </head>
@@ -158,7 +132,7 @@
 
     <div id="portada">
         <h1>William.</h1>
-        <button class="btn-start" onclick="iniciar()">Empezar</button>
+        <button class="btn-start" onclick="activarTodo()">Empezar</button>
     </div>
 
     <div id="main-content">
@@ -187,7 +161,7 @@
             <div class="foto" style="background-image: url('foto3.jpg');"></div>
             <div class="texto">
                 <div class="texto-inner">
-                    <h2>Recuerdo</h2>
+                    <h2>Aquel Día</h2>
                     <p>"Nuestro primer encuentro superó cualquier expectativa. Fue el inicio de algo muy lindo."</p>
                 </div>
             </div>
@@ -197,7 +171,7 @@
             <div class="foto" style="background-image: url('foto4.jpg');"></div>
             <div class="texto">
                 <div class="texto-inner">
-                    <h2>Feliz Día</h2>
+                    <h2>Legado</h2>
                     <p>"Gracias por ser auténtico y dejarme ser parte de tu historia. ¡Te deseo lo mejor!"</p>
                 </div>
             </div>
@@ -206,14 +180,14 @@
     </div>
 
     <script>
-        function iniciar() {
-            // Elimina la portada por completo
-            document.getElementById('portada').style.display = 'none';
-            // Muestra el contenido deslizable
-            const contenido = document.getElementById('main-content');
-            contenido.style.display = 'block';
-            // Permite el movimiento
-            document.body.style.overflow = 'visible';
+        function activarTodo() {
+            // Ocultar portada y mostrar contenido
+            document.getElementById('portada').style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById('portada').style.display = 'none';
+                document.getElementById('main-content').style.display = 'block';
+                document.body.style.overflow = 'visible';
+            }, 800);
         }
     </script>
 </body>
