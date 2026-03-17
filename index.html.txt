@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para William 💗</title>
+    <style>
+        body { margin: 0; padding: 0; background-color: black; color: white; font-family: 'Courier New', Courier, monospace; display: flex; align-items: center; justify-content: center; height: 100vh; overflow: hidden; }
+        #inicio { text-align: center; transition: opacity 1.5s; z-index: 100; }
+        .nombre { font-size: clamp(40px, 8vw, 70px); font-weight: bold; color: white; letter-spacing: 5px; margin-bottom: 10px; }
+        .btn { background: white; color: black; border: none; padding: 12px 40px; border-radius: 25px; cursor: pointer; font-weight: bold; font-size: 16px; }
+        #pantalla-regalo { display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #000; }
+        #letras { position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%); width: 80%; text-align: center; font-size: 22px; z-index: 50; text-shadow: 0 0 15px rgba(255,255,255,0.6); }
+        #contenedor-foto { position: absolute; top: 65%; left: 50%; transform: translate(-50%, -50%); z-index: 60; opacity: 0; transition: opacity 2s; }
+        .foto-william { width: 200px; height: 200px; border-radius: 15px; border: 3px solid white; object-fit: cover; }
+        canvas { display: block; position: absolute; top: 0; left: 0; }
+    </style>
+</head>
+<body>
+
+    <div id="inicio">
+        <div class="nombre">WILLIAM 💗</div>
+        <p>Happy Valentine's Day</p>
+        <button class="btn" onclick="comenzar()">CLICK AQUÍ</button>
+    </div>
+
+    <div id="pantalla-regalo">
+        <div id="letras"></div>
+        <div id="contenedor-foto">
+            <img src="foto_william.jpg" alt="William" class="foto-william">
+        </div>
+        <canvas id="canvasFlores"></canvas>
+    </div>
+
+    <audio id="musica" src="musica.mp3"></audio>
+
+    <script>
+        const letra = [
+            { t: 1, m: "Te siento al cantar y al escuchar cualquier canción" },
+            { t: 5, m: "Bonita que hable del amor" },
+            { t: 9, m: "De lo que siento ayer y hoy" },
+            { t: 13, m: "Siempre te llevo al despertar" },
+            { t: 17, m: "Te vi a los ojos bien..." },
+            { t: 20, m: "Sentí cariño fiel" },
+            { t: 24, m: "Si me rompiera aquí" },
+            { t: 27, m: "Esperaría por ti" },
+            { t: 31, m: "Feliz San Valentín, William 💗" }
+        ];
+
+        function comenzar() {
+            const audio = document.getElementById('musica');
+            document.getElementById('inicio').style.opacity = '0';
+            
+            audio.play().then(() => {
+                setTimeout(() => {
+                    document.getElementById('inicio').style.display = 'none';
+                    document.getElementById('pantalla-regalo').style.display = 'block';
+                    iniciarAnimacion();
+                }, 1000);
+            }).catch(e => {
+                alert("Haz clic de nuevo o revisa que 'musica.mp3' esté en la carpeta.");
+            });
+        }
+
+        function iniciarAnimacion() {
+            const canvas = document.getElementById('canvasFlores');
+            const ctx = canvas.getContext('2d');
+            const audio = document.getElementById('musica');
+            const divLetras = document.getElementById('letras');
+            const contenedorFoto = document.getElementById('contenedor-foto');
+            
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            let flores = [];
+
+            class Flor {
+                constructor() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = canvas.height + 50;
+                    this.size = Math.random() * 10 + 5;
+                    this.speed = Math.random() * 2 + 1;
+                    this.color = ["#BFFF00", "#007FFF", "#FFFFFF"][Math.floor(Math.random() * 3)];
+                }
+                dibujar() {
+                    ctx.fillStyle = this.color;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+                update() { this.y -= this.speed; }
+            }
+
+            function loop() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                let actual = letra.findLast(f => audio.currentTime >= f.t);
+                if(actual) divLetras.innerText = actual.m;
+                if(audio.currentTime >= 31) contenedorFoto.style.opacity = '1';
+
+                if(Math.random() < 0.1) flores.push(new Flor());
+                flores.forEach((f, i) => {
+                    f.update();
+                    f.dibujar();
+                    if(f.y < -50) flores.splice(i, 1);
+                });
+                requestAnimationFrame(loop);
+            }
+            loop();
+        }
+    </script>
+</body>
+</html>
