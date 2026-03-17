@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday</title>
+    <title>Para William | Especial</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-dark: #0a0a0a;
-            --neutro-gris: #3a3a3a;
-            --neutro-verde: #4a5d4a;
+            --bg-dark: #1a1a1a;
+            --neutro-gris: #3d3d3d;
+            --neutro-verde: #2d3b2d;
             --gold: #c5a059;
             --white: #ffffff;
-            --glass: rgba(0, 0, 0, 0.7);
+            --glass: rgba(0, 0, 0, 0.65);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -20,10 +20,11 @@
         body {
             font-family: 'Montserrat', sans-serif;
             color: var(--white);
-            background: linear-gradient(45deg, var(--bg-dark), var(--neutro-gris), var(--neutro-verde), var(--bg-dark));
+            background: linear-gradient(-45deg, var(--bg-dark), var(--neutro-gris), var(--neutro-verde), var(--bg-dark));
             background-size: 400% 400%;
-            animation: gradientAnimation 15s ease infinite;
-            overflow: hidden; /* Bloquea el scroll inicial */
+            animation: gradientAnimation 12s ease infinite;
+            overflow: hidden; /* Bloquea el scroll al inicio */
+            height: 100vh;
         }
 
         @keyframes gradientAnimation {
@@ -34,8 +35,9 @@
 
         .main-container {
             height: 100vh;
-            overflow-y: hidden; /* Se activará con JS después del botón */
+            overflow-y: hidden; /* Se activa con el botón */
             scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
         }
 
         section {
@@ -43,48 +45,53 @@
             width: 100%;
             display: flex;
             scroll-snap-align: start;
-            position: relative;
+            overflow: hidden;
         }
 
-        /* Lado Izquierdo: Imagen */
+        /* Lado Izquierdo: IMAGEN (50%) */
         .image-side {
             width: 50%;
             height: 100%;
             background-size: cover;
             background-position: center;
-            border-right: 1px solid rgba(197, 160, 89, 0.3);
+            background-color: #222; /* Fondo por si no carga la foto */
+            border-right: 1px solid var(--gold);
         }
 
-        /* Lado Derecho: Texto */
+        /* Lado Derecho: TEXTO (50%) */
         .text-side {
             width: 50%;
             height: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 40px;
+            padding: 50px;
             background: var(--glass);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(8px);
         }
 
-        .content { text-align: left; max-width: 90%; }
+        .content { 
+            max-width: 450px; 
+            text-align: right; /* Texto alineado a la derecha */
+        }
 
         h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 3rem;
+            font-size: 3.2rem;
             color: var(--gold);
             margin-bottom: 20px;
+            line-height: 1.1;
         }
 
         p {
-            font-size: 1.2rem;
+            font-size: 1.15rem;
             line-height: 1.8;
             font-weight: 300;
-            border-left: 2px solid var(--gold);
-            padding-left: 20px;
+            border-right: 3px solid var(--gold); /* Línea decorativa a la derecha */
+            padding-right: 20px;
         }
 
-        /* Estilo especial para la Portada (Centrada) */
+        /* Portada Especial */
         #portada {
             flex-direction: column;
             justify-content: center;
@@ -94,29 +101,30 @@
         }
 
         .btn-start {
-            display: inline-block;
             margin-top: 30px;
-            padding: 15px 50px;
-            border: 1px solid var(--gold);
+            padding: 18px 60px;
+            border: 2px solid var(--gold);
             color: var(--gold);
-            text-decoration: none;
-            letter-spacing: 4px;
+            background: transparent;
             text-transform: uppercase;
+            letter-spacing: 5px;
             font-weight: 600;
             cursor: pointer;
-            background: transparent;
-            transition: 0.4s;
+            transition: all 0.5s ease;
         }
 
         .btn-start:hover {
             background: var(--gold);
             color: #000;
+            box-shadow: 0 0 20px rgba(197, 160, 89, 0.4);
         }
 
-        @media (max-width: 800px) {
+        /* Móviles: Se pone uno sobre otro */
+        @media (max-width: 900px) {
             section { flex-direction: column; }
             .image-side, .text-side { width: 100%; height: 50%; }
-            h1 { font-size: 2rem; }
+            .content { text-align: center; }
+            p { border-right: none; border-bottom: 2px solid var(--gold); padding: 0 0 15px 0; }
         }
     </style>
 </head>
@@ -125,51 +133,37 @@
 <div class="main-container" id="container">
 
     <section id="portada">
-        <h1>Feliz Cumpleaños, William.</h1>
-        <button class="btn-start" onclick="activarScroll()">Iniciar</button>
+        <h1>William.</h1>
+        <p style="border:none; padding:0;">Una historia en imágenes y palabras.</p>
+        <button class="btn-start" onclick="activarScroll()">Empezar</button>
     </section>
 
     <section id="pag2">
-        <div class="image-side" style="background-image: url('foto_graduacion.jpg');"></div>
+        <div class="image-side" style="background-image: url('foto1.jpg');"></div>
         <div class="text-side">
             <div class="content">
-                <p>"Verte graduado fue confirmar lo que ya sabía: que tu disciplina no tiene límites. Admiro tu inteligencia y la fuerza con la que persigues tus metas hasta hacerlas realidad."</p>
+                <h1>El Logro</h1>
+                <p>"Verte graduado fue confirmar lo que ya sabía: que tu disciplina no tiene límites. Admiro tu inteligencia y la fuerza con la que persigues tus metas."</p>
             </div>
         </div>
     </section>
 
     <section id="pag3">
-        <div class="image-side" style="background-image: url('foto_trabajo.jpg');"></div>
+        <div class="image-side" style="background-image: url('foto2.jpg');"></div>
         <div class="text-side">
             <div class="content">
-                <p>"Cada día que te esfuerzas en tu trabajo me demuestras el hombre íntegro y responsable que eres. Admiro tu perseverancia, incluso cuando el cansancio pesa."</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="pag4">
-        <div class="image-side" style="background-image: url('foto_ternura.jpg');"></div>
-        <div class="text-side">
-            <div class="content">
+                <h1>La Esencia</h1>
                 <p>"Tienes una nobleza que te hace ser una de esas personas 'buenas' que ya casi no se encuentran. Esa ternura y bondad es tu luz más brillante."</p>
             </div>
         </div>
     </section>
 
-    <section id="pag5">
-        <div class="image-side" style="background-image: url('foto_primer_dia.jpg');"></div>
+    <section id="pag4">
+        <div class="image-side" style="background-image: url('foto3.jpg');"></div>
         <div class="text-side">
             <div class="content">
+                <h1>El Recuerdo</h1>
                 <p>"Aquel primer día que nos vimos en persona se quedó grabado como mi momento favorito. Fue descubrir que el hombre frente a mí superaba cualquier expectativa."</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="pag6">
-        <div class="image-side" style="background-image: url('foto_especial.jpg');"></div>
-        <div class="text-side">
-            <div class="content">
-                <p>"Eres el mejor legado de quienes te aman. Gracias por ser tan auténtico y dejarme ser parte de tu vida. ¡Feliz día!"</p>
             </div>
         </div>
     </section>
@@ -178,11 +172,10 @@
 
 <script>
     function activarScroll() {
-        // Desbloquea el scroll
-        document.getElementById('container').style.overflowY = 'scroll';
-        document.body.style.overflow = 'visible';
-        
-        // Hace scroll suave a la segunda página
+        const container = document.getElementById('container');
+        // Desbloquea el contenedor
+        container.style.overflowY = 'scroll';
+        // Salta suavemente a la siguiente sección
         document.getElementById('pag2').scrollIntoView({ behavior: 'smooth' });
     }
 </script>
