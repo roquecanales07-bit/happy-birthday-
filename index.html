@@ -12,19 +12,19 @@
             --neutro-verde: #2d3b2d;
             --gold: #c5a059;
             --white: #ffffff;
-            --glass: rgba(0, 0, 0, 0.65);
+            --glass: rgba(0, 0, 0, 0.7);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        body {
+        body, html {
+            height: 100vh;
+            overflow: hidden; /* BLOQUEO TOTAL DE SCROLL */
             font-family: 'Montserrat', sans-serif;
             color: var(--white);
             background: linear-gradient(-45deg, var(--bg-dark), var(--neutro-gris), var(--neutro-verde), var(--bg-dark));
             background-size: 400% 400%;
             animation: gradientAnimation 12s ease infinite;
-            overflow: hidden; /* Bloquea el scroll al inicio */
-            height: 100vh;
         }
 
         @keyframes gradientAnimation {
@@ -35,63 +35,61 @@
 
         .main-container {
             height: 100vh;
-            overflow-y: hidden; /* Se activa con el botón */
+            overflow-y: hidden; /* Solo se activa con el botón */
             scroll-snap-type: y mandatory;
             scroll-behavior: smooth;
         }
 
         section {
             height: 100vh;
-            width: 100%;
+            width: 100vw;
             display: flex;
             scroll-snap-align: start;
-            overflow: hidden;
+            position: relative;
         }
 
-        /* Lado Izquierdo: IMAGEN (50%) */
+        /* LADO IZQUIERDO: FOTOS */
         .image-side {
             width: 50%;
             height: 100%;
             background-size: cover;
             background-position: center;
-            background-color: #222; /* Fondo por si no carga la foto */
-            border-right: 1px solid var(--gold);
+            border-right: 2px solid var(--gold);
         }
 
-        /* Lado Derecho: TEXTO (50%) */
+        /* LADO DERECHO: TEXTO */
         .text-side {
             width: 50%;
             height: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 50px;
+            padding: 60px;
             background: var(--glass);
-            backdrop-filter: blur(8px);
+            backdrop-filter: blur(10px);
         }
 
-        .content { 
-            max-width: 450px; 
-            text-align: right; /* Texto alineado a la derecha */
+        .content {
+            max-width: 500px;
+            text-align: right; /* Alineado a la derecha como pediste */
         }
 
         h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 3.2rem;
+            font-size: 3.5rem;
             color: var(--gold);
             margin-bottom: 20px;
-            line-height: 1.1;
         }
 
         p {
-            font-size: 1.15rem;
+            font-size: 1.25rem;
             line-height: 1.8;
             font-weight: 300;
-            border-right: 3px solid var(--gold); /* Línea decorativa a la derecha */
-            padding-right: 20px;
+            border-right: 3px solid var(--gold);
+            padding-right: 25px;
         }
 
-        /* Portada Especial */
+        /* PORTADA ESPECIAL (Centrada) */
         #portada {
             flex-direction: column;
             justify-content: center;
@@ -101,25 +99,25 @@
         }
 
         .btn-start {
-            margin-top: 30px;
-            padding: 18px 60px;
+            margin-top: 40px;
+            padding: 20px 70px;
             border: 2px solid var(--gold);
             color: var(--gold);
             background: transparent;
             text-transform: uppercase;
-            letter-spacing: 5px;
+            letter-spacing: 6px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.5s ease;
+            transition: 0.5s;
         }
 
         .btn-start:hover {
             background: var(--gold);
             color: #000;
-            box-shadow: 0 0 20px rgba(197, 160, 89, 0.4);
+            box-shadow: 0 0 25px rgba(197, 160, 89, 0.5);
         }
 
-        /* Móviles: Se pone uno sobre otro */
+        /* AJUSTE PARA MÓVILES */
         @media (max-width: 900px) {
             section { flex-direction: column; }
             .image-side, .text-side { width: 100%; height: 50%; }
@@ -134,7 +132,7 @@
 
     <section id="portada">
         <h1>William.</h1>
-        <p style="border:none; padding:0;">Una historia en imágenes y palabras.</p>
+        <p style="border:none; padding:0;">Un pequeño detalle para un gran hombre.</p>
         <button class="btn-start" onclick="activarScroll()">Empezar</button>
     </section>
 
@@ -143,7 +141,7 @@
         <div class="text-side">
             <div class="content">
                 <h1>El Logro</h1>
-                <p>"Verte graduado fue confirmar lo que ya sabía: que tu disciplina no tiene límites. Admiro tu inteligencia y la fuerza con la que persigues tus metas."</p>
+                <p>"Verte graduado fue confirmar lo que ya sabía: que tu disciplina no tiene límites. Tu inteligencia y fuerza son admirables."</p>
             </div>
         </div>
     </section>
@@ -152,8 +150,8 @@
         <div class="image-side" style="background-image: url('foto2.jpg');"></div>
         <div class="text-side">
             <div class="content">
-                <h1>La Esencia</h1>
-                <p>"Tienes una nobleza que te hace ser una de esas personas 'buenas' que ya casi no se encuentran. Esa ternura y bondad es tu luz más brillante."</p>
+                <h1>Tu Luz</h1>
+                <p>"Tienes una nobleza única. Esa ternura y bondad es lo que te hace ser una persona realmente especial en este mundo."</p>
             </div>
         </div>
     </section>
@@ -162,8 +160,8 @@
         <div class="image-side" style="background-image: url('foto3.jpg');"></div>
         <div class="text-side">
             <div class="content">
-                <h1>El Recuerdo</h1>
-                <p>"Aquel primer día que nos vimos en persona se quedó grabado como mi momento favorito. Fue descubrir que el hombre frente a mí superaba cualquier expectativa."</p>
+                <h1>Feliz Día</h1>
+                <p>"Gracias por ser tan auténtico y dejarme ser parte de tu historia. Te deseo lo mejor hoy y siempre."</p>
             </div>
         </div>
     </section>
@@ -173,9 +171,11 @@
 <script>
     function activarScroll() {
         const container = document.getElementById('container');
-        // Desbloquea el contenedor
+        // ACTIVAMOS EL SCROLL
         container.style.overflowY = 'scroll';
-        // Salta suavemente a la siguiente sección
+        document.body.style.overflow = 'visible';
+        
+        // MOVIMIENTO AUTOMÁTICO A LA SEGUNDA PARTE
         document.getElementById('pag2').scrollIntoView({ behavior: 'smooth' });
     }
 </script>
